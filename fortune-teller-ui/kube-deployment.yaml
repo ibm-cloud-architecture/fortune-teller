@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  labels:
+    app: fortune-teller
+    component: fortune-ui
+  name: fortune-teller-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fortune-teller
+      component: fortune-ui
+  template:
+    metadata:
+      labels:
+        app: fortune-teller
+        component: fortune-ui
+    spec:
+      containers:
+      - image: jkwong/fortune-teller-ui:latest
+        imagePullPolicy: Always
+        name: fortune-ui
+        ports:
+        - containerPort: 8080
+          name: http 
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        configMap:
+          name: misty-buffalo-spring-config-server-bootstrap

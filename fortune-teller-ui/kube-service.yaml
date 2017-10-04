@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fortune-teller
+    component: fortune-ui
+  name: fortune-teller
+spec:
+  ports:
+  - name: http
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: fortune-teller
+    component: fortune-ui
+  type: ClusterIP
+
+
