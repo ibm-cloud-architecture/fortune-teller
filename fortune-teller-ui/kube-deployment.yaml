@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: misty-buffalo-spring-config-server-bootstrap
+          name: spring-config-server-bootstrap

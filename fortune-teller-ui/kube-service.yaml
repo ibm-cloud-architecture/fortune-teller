@@ -14,6 +14,6 @@ spec:
   selector:
     app: fortune-teller
     component: fortune-ui
-  type: ClusterIP
+  type: NodePort
 
 
