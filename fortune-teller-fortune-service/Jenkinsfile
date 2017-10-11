@@ -31,13 +31,15 @@ node {
     }
     
     stage('Deploy application') {
-        /* Update deployment to use latest image */
-      sh "sed -i \'s|jkwong/fortune-teller-fortune-service:latest|mycluster.icp:8500/${params.namespace}/fortune-teller-fortune-service:${env.BUILD_NUMBER}|g\' fortune-teller-fortune-service/kube-deployment.yaml"
-      sh "sed -i \'s|spring-config-server-bootstrap|${params.namespace}-spring-stack-spring-config-server-bootstrap|g\' fortune-teller-fortune-service/kube-deployment.yaml"
-
       sh '''
         #!/bin/bash
-        
+
+        # Update deployment to use latest image
+        sed -i "s|jkwong/fortune-teller-fortune-service:latest|mycluster.icp:8500/${params.namespace}/fortune-teller-fortune-service:${env.BUILD_NUMBER}|g" fortune-teller-fortune-service/kube-deployment.yaml
+
+        # Update deployment to use the correct boostrap configmap
+        sed -i "s|spring-config-server-bootstrap|${params.namespace}-spring-stack-spring-config-server-bootstrap|g" fortune-teller-fortune-service/kube-deployment.yaml
+
         kubectl --namespace ${params.namespace} apply -f fortune-teller-fortune-service/kube-deployment.yaml
       '''
     }
