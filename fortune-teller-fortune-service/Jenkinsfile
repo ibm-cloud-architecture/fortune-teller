@@ -15,8 +15,7 @@ node {
     }
       
     stage('Build image') {
-        sh 'cd fortune-teller-fortune-service'
-        app = docker.build("${params.namespace}/fortune-teller-fortune-service")
+        app = docker.build("${params.namespace}/fortune-teller-fortune-service", 'fortune-teller-fortune-service')
     }
 
     stage('Push image') {
