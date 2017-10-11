@@ -31,8 +31,8 @@ node {
     
     stage('Deploy application') {
         /* Update deployment to use latest image */
-      sh "sed -i 's|jkwong/fortune-teller-ui:latest|mycluster.icp:8500/${params.namespace}/fortune-teller-ui:${env.BUILD_NUMBER}/g' fortune-teller-ui/kube-deployment.yaml "
-      sh "sed -i 's|spring-config-server-bootstrap|${params.namespace}-spring-stack-spring-config-server-bootstrap/g' fortune-teller-ui/kube-deployment.yaml "
+      sh "sed -i 's|jkwong/fortune-teller-ui:latest|mycluster.icp:8500/${params.namespace}/fortune-teller-ui:${env.BUILD_NUMBER}|g' fortune-teller-ui/kube-deployment.yaml "
+      sh "sed -i 's|spring-config-server-bootstrap|${params.namespace}-spring-stack-spring-config-server-bootstrap|g' fortune-teller-ui/kube-deployment.yaml "
 
       sh '''
         #!/bin/bash
