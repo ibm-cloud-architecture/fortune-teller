@@ -15,6 +15,7 @@ node {
     }
       
     stage('Build image') {
+        sh 'cd fortune-teller-ui'
         app = docker.build("${params.namespace}/fortune-teller-ui")
     }
 
